@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import random
+import sys
 
 # ==============================
 # 1. CARREGAR VÍDEO E IMAGEM
@@ -10,11 +11,11 @@ imagem = cv2.imread('OpenCV_logo.png')
 
 if not video.isOpened():
     print("Erro ao abrir o vídeo!")
-    exit()
+    sys.exit()
 
 if imagem is None:
     print("Erro ao carregar imagem!")
-    exit()
+    sys.exit()
 
 # ==============================
 # 2. PROPRIEDADES DO VÍDEO
@@ -23,7 +24,7 @@ largura_vid = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
 altura_vid = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
 fps = video.get(cv2.CAP_PROP_FPS)
 
-if fps == 0:
+if fps == 0 or np.isnan(fps):
     fps = 30  # fallback
 
 # ==============================
@@ -71,6 +72,7 @@ while video.isOpened():
 
     # Segurança contra erro de dimensão
     if roi.shape[0] != nova_altura or roi.shape[1] != nova_largura:
+        frame_count += 1
         continue
 
     # ==============================
