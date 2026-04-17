@@ -14,7 +14,7 @@ fps    = cap.get(cv2.CAP_PROP_FPS)
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
 out = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
 
-# Definição do intervalo de cor (ajuste se necessário)
+# Definição do intervalo de cor 
 lower_color = np.array([35, 50, 50])
 upper_color = np.array([85, 255, 255])
 
