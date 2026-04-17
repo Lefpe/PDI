@@ -1,0 +1,67 @@
+def threshold_binario(imagem, valor=127):
+    gray = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
+    _, th = cv2.threshold(gray, valor, 255, cv2.THRESH_BINARY)
+    return th
+
+def threshold_binario_inv(imagem, valor=127):
+    gray = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
+    _, th = cv2.threshold(gray, valor, 255, cv2.THRESH_BINARY_INV)
+    return th
+
+def threshold_truncado(imagem, valor=127):
+    gray = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
+    _, th = cv2.threshold(gray, valor, 255, cv2.THRESH_TRUNC)
+    return th
+
+def threshold_tozero(imagem, valor=127):
+    gray = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
+    _, th = cv2.threshold(gray, valor, 255, cv2.THRESH_TOZERO)
+    return th
+
+def threshold_tozero_inv(imagem, valor=127):
+    gray = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
+    _, th = cv2.threshold(gray, valor, 255, cv2.THRESH_TOZERO_INV)
+    return th
+
+def threshold_otsu(imagem):
+    gray = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
+    _, th = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    return th
+
+def threshold_adaptativo(imagem):
+    gray = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
+    
+    th = cv2.adaptiveThreshold(
+        gray,
+        255,
+        cv2.ADAPTIVE_THRESH_MEAN_C,
+        cv2.THRESH_BINARY,
+        11,
+        2
+    )
+    def threshold_com_blur(imagem):
+    gray = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
+    blur = cv2.GaussianBlur(gray, (5, 5), 0)
+    
+    _, th = cv2.threshold(blur, 127, 255, cv2.THRESH_BINARY)
+    return th
+def remover_fundo_branco(imagem):
+    gray = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
+    
+    _, mask = cv2.threshold(gray, 200, 255, cv2.THRESH_BINARY_INV)
+    
+    resultado = cv2.bitwise_and(imagem, imagem, mask=mask)
+    return resultado, mask
+
+
+
+    return th
+
+
+def aplicar_threshold(imagem, tipo):
+    if tipo == "binario":
+        return threshold_binario(imagem)
+    elif tipo == "otsu":
+        return threshold_otsu(imagem)
+    elif tipo == "adaptativo":
+        return threshold_adaptativo(imagem)
