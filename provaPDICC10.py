@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-
+#o collab nã estava salvando o resultado então compilei em outra máquina
 # 1. Configurações de entrada e saída
 video_path = 'Caxias.mp4'
 output_path = 'color_splash_resultado.mp4'
